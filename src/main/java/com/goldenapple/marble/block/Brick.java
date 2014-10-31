@@ -5,8 +5,8 @@ import com.goldenapple.marble.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class BlockBrick extends Block {
-    public BlockBrick(Material material, String name, SoundType sound){
+public class Brick extends Block {
+    public Brick(Material material, String name, SoundType sound){
         super(material);
         this.setCreativeTab(MarbleCreativeTab.MarbleTab);
         this.setBlockName(name);
