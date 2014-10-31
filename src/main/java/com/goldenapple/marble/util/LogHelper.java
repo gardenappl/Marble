@@ -1,4 +1,4 @@
-package com.goldenapple.coppertools.util;
+package com.goldenapple.marble.util;
 
 import com.goldenapple.marble.reference.Reference;
 import cpw.mods.fml.common.FMLLog;
