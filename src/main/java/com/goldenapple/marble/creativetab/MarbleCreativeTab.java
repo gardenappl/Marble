@@ -9,7 +9,7 @@ public class MarbleCreativeTab {
     public static final CreativeTabs MarbleTab = new CreativeTabs(Reference.MOD_ID) {
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(ModBlocks.brickIron);
+            return Item.getItemFromBlock(ModBlocks.glassPaneMulticolor);
         }
     };
 }
