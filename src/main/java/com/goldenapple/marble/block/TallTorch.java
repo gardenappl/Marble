@@ -11,31 +11,42 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class TallTorchTop extends Block {
+public class TallTorch extends Block {
     @SideOnly(Side.CLIENT)
     private IIcon topIcon;
     @SideOnly(Side.CLIENT)
     private IIcon elseIcon;
 
-    public TallTorchTop(){
+    public TallTorch(){
         super(Material.circuits);
-        this.setBlockName(Names.tallTorchTop);
+        this.setBlockName(Names.tallTorch);
         this.setHardness(0.0F);
         this.setLightLevel(0.9375F);
         this.setStepSound(soundTypeWood);
-        this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.5F, 0.5625F);
         this.setTickRandomly(true);
     }
 
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random rand){
-        {
+        int meta = world.getBlockMetadata(x, y, z);
+        if(meta == 1) {
             world.spawnParticle("smoke", x + 0.5, y + 0.6, z + 0.5, 0.0D, 0.0D, 0.0D);
             world.spawnParticle("flame", x + 0.5, y + 0.6, z + 0.5, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z){
+        int meta = world.getBlockMetadata(x, y, z);
+        if(meta == 1){
+            setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.5F, 0.5625F);
+        }else{
+            setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 1.0F, 0.5625F);
         }
     }
 
@@ -58,7 +69,7 @@ public class TallTorchTop extends Block {
 
     @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z){
-        return false;
+        return world.getBlock(x, y - 1, z).canPlaceTorchOnTop(world, x, y - 1, z) && super.canPlaceBlockAt(world, x, y, z);
     }
 
     @Override
@@ -73,34 +84,48 @@ public class TallTorchTop extends Block {
 
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block){
-        if (!(world.getBlock(x, y - 1, z) instanceof TallTorchBottom)){ //If the block below isn't the bottom
-            world.setBlockToAir(x, y, z); //Don't drop anything; the top block should drop the item
+        int meta = world.getBlockMetadata(x, y, z);
+
+        if(meta == 1) {//Top
+            if (!(world.getBlock(x, y - 1, z) instanceof TallTorch)) { //If the block below isn't the bottom
+                world.setBlockToAir(x, y, z);
+            }
+        }else{ //Bottom
+            if (!world.getBlock(x, y - 1, z).canPlaceTorchOnTop(world, x, y - 1, z)) { //If the side of the block below isn't solid a.k.a If the block below is broken
+                if (world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+                    dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+                }
+                world.setBlockToAir(x, y, z);
+            }
+            if(!(world.getBlock(x, y + 1, z) instanceof TallTorch)){ //If the block above isn't the top
+                world.setBlockToAir(x, y, z);
+            }
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta){
-        return side == 1 ? topIcon : elseIcon;
+        if(meta == 1) {
+            return side == 1 ? topIcon : elseIcon;
+        }else{
+            return blockIcon;
+        }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        elseIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + "tall_torch_top");
-        topIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + "tall_torch_top_top_(WAT)");
+        elseIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch + "_top");
+        topIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch + "_top_top_(WAT)");
+        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch + "_bottom");
     }
 
     //Stolen from Pahimar ;) https://github.com/pahimar/LetsModReboot
     @Override
     public String getUnlocalizedName()
     {
-        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + getUnwrappedUnlocalizedName(super.getUnlocalizedName());
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch;
     }
 }

@@ -51,5 +51,4 @@ public class LogHelper
         log(Level.ALL, object);
     }
 
-
 }

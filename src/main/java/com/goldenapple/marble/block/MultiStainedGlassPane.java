@@ -6,6 +6,7 @@ import com.goldenapple.marble.reference.Names;
 import com.goldenapple.marble.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,24 +18,41 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class GlassPaneMulticolor extends BlockStainedGlassPane {
+import static com.goldenapple.marble.reference.Names.multiStainedGlassPane;
 
-    public GlassPaneMulticolor(){
-        this.setCreativeTab(MarbleCreativeTab.MarbleTab);
-        this.setBlockName(Names.glassPaneMulticolor);
-    }
+public class MultiStainedGlassPane extends BlockStainedGlassPane {
 
     @SideOnly(Side.CLIENT)
     private IIcon topIcon;
 
+    public MultiStainedGlassPane(){
+        this.setCreativeTab(MarbleCreativeTab.MarbleTab);
+        this.setBlockName(multiStainedGlassPane);
+        this.setStepSound(Block.soundTypeGlass);
+        this.setHardness(0.3F);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon func_150097_e()
+    {
+        return this.topIcon;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon func_149735_b(int p_149735_1_, int p_149735_2_){ //Apparently this is used for rendering the block in your inventory as a flat icon
+        return this.blockIcon;
+    }
+
     @Override
     public Item getItemDropped(int meta, Random rand, int fortune){
-        return Item.getItemFromBlock(ModBlocks.glassPaneMulticolor);
+        return Item.getItemFromBlock(ModBlocks.multiStainedGlassPane);
     }
 
     @Override
     public Item getItem(World world, int x, int y, int z){
-        return Item.getItemFromBlock(ModBlocks.glassPaneMulticolor);
+        return Item.getItemFromBlock(ModBlocks.multiStainedGlassPane);
     }
 
     @Override
@@ -46,27 +64,16 @@ public class GlassPaneMulticolor extends BlockStainedGlassPane {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta){
-        return side == 1 ? topIcon : blockIcon;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
-        topIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())) + "_top");
+        blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":" + Names.multiStainedGlass);
+        topIcon = iconRegister.registerIcon(Reference.MOD_ID + ":" + Names.multiStainedGlassPane + "_top");
     }
 
     //Stolen from Pahimar ;) https://github.com/pahimar/LetsModReboot
     @Override
     public String getUnlocalizedName()
     {
-        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + getUnwrappedUnlocalizedName(super.getUnlocalizedName());
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+        return "tile." + Reference.MOD_ID + ":" + multiStainedGlassPane;
     }
 }

@@ -1,6 +1,5 @@
 package com.goldenapple.marble.item;
 
-import com.goldenapple.marble.block.TallTorchBottom;
 import com.goldenapple.marble.creativetab.MarbleCreativeTab;
 import com.goldenapple.marble.init.ModBlocks;
 import com.goldenapple.marble.reference.Names;
@@ -22,26 +21,19 @@ public class TallTorchItem extends Item {
 
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float p_77648_8_, float p_77648_9_, float p_77648_10_){
-        if(side != 1){
+        if(side != 1 || !player.canPlayerEdit(x, y + 1, z, side, itemStack) || !player.canPlayerEdit(x, y + 2, z, side, itemStack)) {
+            return false;
+        }
+        Block torch = ModBlocks.tallTorch;
+        if(!torch.canPlaceBlockAt(world, x, y + 1, z) || !world.getBlock(x, y + 2, z).isReplaceable(world, x, y + 2, z)){
             return false;
         }
 
-        Block bottom = ModBlocks.tallTorchBottom;
-        Block top = ModBlocks.tallTorchTop;
-
-        if(player.canPlayerEdit(x, y + 1, z, side, itemStack) || player.canPlayerEdit(x, y + 2, z, side, itemStack)){
-            if(bottom.canPlaceBlockAt(world, x, y, z) || top.canPlaceBlockAt(world, x, y + 1, z)){
-                world.setBlock(x, y + 1, z, bottom);
-                world.setBlock(x, y + 2, z, top);
-                world.notifyBlocksOfNeighborChange(x, y + 1, z, bottom);
-                world.notifyBlocksOfNeighborChange(x, y + 2, z, top);
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
+        world.setBlock(x, y + 1, z, torch);
+        world.notifyBlocksOfNeighborChange(x, y + 1, z, torch);
+        world.setBlock(x, y + 2, z, torch, 1, 2);
+        world.notifyBlocksOfNeighborChange(x, y + 2, z, torch);
+        return true;
     }
 
     @Override
