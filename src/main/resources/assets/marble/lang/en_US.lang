@@ -1,6 +1,11 @@
 # Items
-item.marble:master_sword.name=Master Sword
-item.marble:tall_torch.name=Tall Torch
+item.marble:diamond_nugget.name=Diamond Nugget
+item.marble:diamond_dust.name=Diamond Dust
+item.marble:aetheric_dust.name=Aetheric Dust
+item.marble:diamond_dust_small.name=Tiny Pile of Diamond Dust
+item.marble:diamond_nugget_lump.name=Lump of Diamond Nuggets
+item.marble:diamond_arrow.name=Diamond Arrow
+item.marble:aetheric_arrow.name=Aetheric Arrow
 
 # Blocks
 tile.marble:glass_pane_multicolor.name=Multicolored Stained Glass Pane
@@ -8,6 +13,14 @@ tile.marble:glass_multicolor.name=Multicolored Stained Glass
 tile.marble:rope.name=Rope
 tile.marble:enchanted_rope.name=Enchanted Rope
 tile.marble:tall_torch.name=Tall Torch
+tile.marble:table_quartz.name=Quartz Crafting Table (WIP!)
+tile.marble:table_cobble.name=Cobblestone Crafting Table (WIP!)
+tile.marble:round_robin_hopper.name=Round Robin Hopper
+
+# Tooltips
+tooltip.marble.diamond_nugget_lump1=Break with a diamond pickaxe
+tooltip.marble.diamond_nugget_lump2=or better to get dust
 
 # Misc
 itemGroup.marble=Marble
+enchantment.marble.withering=Withering

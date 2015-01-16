@@ -8,27 +8,38 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
-public class TallTorch extends Block {
+public class BlockTallTorch extends BlockCommon {
     @SideOnly(Side.CLIENT)
     private IIcon topIcon;
     @SideOnly(Side.CLIENT)
     private IIcon elseIcon;
 
-    public TallTorch(){
-        super(Material.circuits);
-        this.setBlockName(Names.tallTorch);
+    public BlockTallTorch(){
+        super(Names.TALL_TORCH, Material.circuits);
         this.setHardness(0.0F);
         this.setLightLevel(0.9375F);
         this.setStepSound(soundTypeWood);
         this.setTickRandomly(true);
+    }
+
+    @Override
+    public Item getItem(World world, int x, int y, int z) {
+        return ModItems.tallTorch;
+    }
+
+    @Override
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) { //dunno what those parametres mean.
+        return ModItems.tallTorch;
     }
 
     @Override
@@ -73,21 +84,11 @@ public class TallTorch extends Block {
     }
 
     @Override
-     public Item getItemDropped(int metadata, Random rand, int fortune){
-        return ModItems.tallTorch;
-    }
-
-    @Override
-    public Item getItem(World world, int x, int y, int z){
-        return ModItems.tallTorch;
-    }
-
-    @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block){
         int meta = world.getBlockMetadata(x, y, z);
 
         if(meta == 1) {//Top
-            if (!(world.getBlock(x, y - 1, z) instanceof TallTorch)) { //If the block below isn't the bottom
+            if (!(world.getBlock(x, y - 1, z) instanceof BlockTallTorch)) { //If the block below isn't the bottom
                 world.setBlockToAir(x, y, z);
             }
         }else{ //Bottom
@@ -97,7 +98,7 @@ public class TallTorch extends Block {
                 }
                 world.setBlockToAir(x, y, z);
             }
-            if(!(world.getBlock(x, y + 1, z) instanceof TallTorch)){ //If the block above isn't the top
+            if(!(world.getBlock(x, y + 1, z) instanceof BlockTallTorch)){ //If the block above isn't the top
                 world.setBlockToAir(x, y, z);
             }
         }
@@ -114,18 +115,16 @@ public class TallTorch extends Block {
     }
 
     @Override
+    public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List p_149666_3_) {
+        //NO-OP    I don't want the block to be displayed. Look at ItemTallTorch instead.
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        elseIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch + "_top");
-        topIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch + "_top_top_(WAT)");
-        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch + "_bottom");
-    }
-
-    //Stolen from Pahimar ;) https://github.com/pahimar/LetsModReboot
-    @Override
-    public String getUnlocalizedName()
-    {
-        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + Names.tallTorch;
+        elseIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.TALL_TORCH + "_top");
+        topIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.TALL_TORCH + "_top_top_(WAT)");
+        blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.TALL_TORCH + "_bottom");
     }
 }

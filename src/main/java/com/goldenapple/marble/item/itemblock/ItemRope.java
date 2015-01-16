@@ -1,10 +1,7 @@
-package com.goldenapple.marble.item;
+package com.goldenapple.marble.item.itemblock;
 
-import com.goldenapple.marble.init.ModBlocks;
 import com.goldenapple.marble.reference.Names;
 import com.goldenapple.marble.reference.Reference;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -13,12 +10,13 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class RopeItem extends ItemBlock{
-    public RopeItem(Block block) {
+public class ItemRope extends ItemBlock{
+    public ItemRope(Block block) {
         super(block);
         this.setHasSubtypes(true);
     }
 
+    @SuppressWarnings({"unchecked"})
     @Override
     public void getSubItems(Item item, CreativeTabs tabs, List list){
         list.add(new ItemStack(item, 1, 0));
@@ -27,16 +25,16 @@ public class RopeItem extends ItemBlock{
 
     @Override
     public int getMetadata(int meta){
-        return meta;
+        return meta == 1 ? meta : 0;
     }
 
     @Override
     public String getUnlocalizedName(){
-        return "tile." + Reference.MOD_ID + ":" + Names.rope;
+        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + Names.ROPE;
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack){
-        return "tile." + Reference.MOD_ID + ":" + (stack.getItemDamage() == 1 ? Names.enchantedRope : Names.rope);
+        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + (stack.getItemDamage() == 1 ? Names.ENCHANTED_ROPE : Names.ROPE);
     }
 }

@@ -1,6 +1,6 @@
-package com.goldenapple.marble.item;
+package com.goldenapple.marble.item.itemblock;
 
-import com.goldenapple.marble.creativetab.MarbleCreativeTab;
+import com.goldenapple.marble.Marble;
 import com.goldenapple.marble.init.ModBlocks;
 import com.goldenapple.marble.reference.Names;
 import com.goldenapple.marble.reference.Reference;
@@ -13,10 +13,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class TallTorchItem extends Item {
-    public TallTorchItem(){
-        setCreativeTab(MarbleCreativeTab.MarbleTab);
-        setUnlocalizedName(Names.tallTorch);
+public class ItemTallTorch extends Item {
+    public ItemTallTorch() {
+        setCreativeTab(Marble.MarbleCreativeTab);
     }
 
     @Override
@@ -28,35 +27,31 @@ public class TallTorchItem extends Item {
         if(!torch.canPlaceBlockAt(world, x, y + 1, z) || !world.getBlock(x, y + 2, z).isReplaceable(world, x, y + 2, z)){
             return false;
         }
-
         world.setBlock(x, y + 1, z, torch);
         world.notifyBlocksOfNeighborChange(x, y + 1, z, torch);
-        world.setBlock(x, y + 2, z, torch, 1, 2);
+        world.setBlock(x ,y + 2, z, torch, 1, 2);
         world.notifyBlocksOfNeighborChange(x, y + 2, z, torch);
+        itemStack.setItemDamage(itemStack.getItemDamage() - 1);
+        world.playSoundAtEntity(player, Block.soundTypeWood.getBreakSound(), 1.0F, 1.0F);
         return true;
     }
 
     @Override
     public String getUnlocalizedName()
     {
-        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + Names.TALL_TORCH;
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
-        return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return "tile." + Reference.MOD_ID.toLowerCase() + ":" + Names.TALL_TORCH;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister)
     {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+        itemIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + Names.TALL_TORCH);
     }
 }
