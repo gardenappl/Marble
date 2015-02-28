@@ -1,5 +1,6 @@
 package com.goldenapple.marble.util;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -11,6 +12,10 @@ public class OreHelper {
             }
         }
         return false;
+    }
+
+    public static boolean isItemThisOre(Item item, String ore){
+        return isItemThisOre(new ItemStack(item), ore);
     }
 
     public static void dumpAllOres(){

@@ -1,9 +1,11 @@
 package com.goldenapple.marble;
 
+import com.goldenapple.marble.crafting.CraftingHandler;
 import com.goldenapple.marble.enhcant.EnchantmentWithering;
 import com.goldenapple.marble.enhcant.WitheringHandler;
 import com.goldenapple.marble.handler.ConfigHandler;
 import com.goldenapple.marble.handler.GuiHandler;
+import com.goldenapple.marble.handler.TooltipHandler;
 import com.goldenapple.marble.init.ModBlocks;
 import com.goldenapple.marble.init.ModItems;
 import com.goldenapple.marble.init.ModRecipes;
@@ -16,6 +18,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -29,7 +32,7 @@ import java.util.Random;
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME)
 public class Marble {
 
-    public static final CreativeTabs MarbleCreativeTab = new CreativeTabs(Reference.MOD_ID) {
+    public static final CreativeTabs MarbleCreativeTab = new CreativeTabs(Reference.MOD_ID.toLowerCase()) {
         @Override
         public Item getTabIconItem() {
             return Item.getItemFromBlock(ModBlocks.multiStainedGlass);
@@ -57,6 +60,8 @@ public class Marble {
     public void preInit(FMLPreInitializationEvent event) {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
+        FMLCommonHandler.instance().bus().register(new CraftingHandler());
+        MinecraftForge.EVENT_BUS.register(new TooltipHandler());
 
         if(ConfigHandler.loadWithering){
             Enchantment Withering = new EnchantmentWithering(ConfigHandler.witheringID);
@@ -74,7 +79,7 @@ public class Marble {
     public void init(FMLInitializationEvent event) {
         ModRecipes.init();
 
-        new GuiHandler();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Marble.instance, new GuiHandler());
     }
 
     @EventHandler

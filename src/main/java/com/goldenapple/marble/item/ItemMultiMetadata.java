@@ -49,6 +49,10 @@ public class ItemMultiMetadata extends ItemCommon {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return "item." + Reference.MOD_ID.toLowerCase() + ":" + names[stack.getItemDamage()];
+        if(stack.getItemDamage() < names.length) {
+            return "item." + Reference.MOD_ID.toLowerCase() + ":" + names[stack.getItemDamage()];
+        }else{
+            return "item." + Reference.MOD_ID.toLowerCase() + ":" + names[0];
+        }
     }
 }

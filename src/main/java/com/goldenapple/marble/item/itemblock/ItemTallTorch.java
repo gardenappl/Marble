@@ -31,8 +31,8 @@ public class ItemTallTorch extends Item {
         world.notifyBlocksOfNeighborChange(x, y + 1, z, torch);
         world.setBlock(x ,y + 2, z, torch, 1, 2);
         world.notifyBlocksOfNeighborChange(x, y + 2, z, torch);
-        itemStack.setItemDamage(itemStack.getItemDamage() - 1);
         world.playSoundAtEntity(player, Block.soundTypeWood.getBreakSound(), 1.0F, 1.0F);
+        itemStack.stackSize -= 1;
         return true;
     }
 

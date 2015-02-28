@@ -1,11 +1,10 @@
 # Items
-item.marble:diamond_nugget.name=Diamond Nugget
 item.marble:diamond_dust.name=Diamond Dust
-item.marble:aetheric_dust.name=Aetheric Dust
 item.marble:diamond_dust_small.name=Tiny Pile of Diamond Dust
-item.marble:diamond_nugget_lump.name=Lump of Diamond Nuggets
-item.marble:diamond_arrow.name=Diamond Arrow
-item.marble:aetheric_arrow.name=Aetheric Arrow
+item.marble:aetheric_dust.name=Aetheric Dust
+item.marble:apple_pie.name=Apple Pie
+item.marble:golden_apple_pie.name=Golden Apple Pie
+item.marble:food_void.name=Belly Emptinizator Pills 3000
 
 # Blocks
 tile.marble:glass_pane_multicolor.name=Multicolored Stained Glass Pane
@@ -15,11 +14,31 @@ tile.marble:enchanted_rope.name=Enchanted Rope
 tile.marble:tall_torch.name=Tall Torch
 tile.marble:table_quartz.name=Quartz Crafting Table (WIP!)
 tile.marble:table_cobble.name=Cobblestone Crafting Table (WIP!)
-tile.marble:round_robin_hopper.name=Round Robin Hopper
+tile.marble:round_robin_buffer.name=Round Robin Buffer (WIP!)
+tile.marble:null.name=null
+tile.marble:hardened_clay_brick.name=Hardened Clay Brick
+tile.marble:white_clay_brick.name=White Clay Brick
+tile.marble:orange_clay_brick.name=Orange Clay Brick
+tile.marble:magenta_clay_brick.name=Magenta Clay Brick
+tile.marble:light_blue_clay_brick.name=Light Blue Clay Brick
+tile.marble:yellow_clay_brick.name=Yellow Clay Brick
+tile.marble:lime_clay_brick.name=Lime Clay Brick
+tile.marble:pink_clay_brick.name=Pink Clay Brick
+tile.marble:gray_clay_brick.name=Gray Clay Brick
+tile.marble:light_gray_clay_brick.name=Light Gray Clay Brick
+tile.marble:cyan_clay_brick.name=Cyan Clay Brick
+tile.marble:purple_clay_brick.name=Purple Clay Brick
+tile.marble:blue_clay_brick.name=Blue Clay Brick
+tile.marble:brown_clay_brick.name=Brown Clay Brick
+tile.marble:green_clay_brick.name=Green Clay Brick
+tile.marble:red_clay_brick.name=Red Clay Brick
+tile.marble:black_clay_brick.name=Black Clay Brick
 
 # Tooltips
-tooltip.marble.diamond_nugget_lump1=Break with a diamond pickaxe
-tooltip.marble.diamond_nugget_lump2=or better to get dust
+tooltip.marble.creative=§6Creative Only
+tooltip.marble.unbreakable=Unbreakable
+tooltip.marble.food_void=Eat them to become hungry
+tooltip.marble.dust=Just add some pickaxes to a diamond...
 
 # Misc
 itemGroup.marble=Marble
