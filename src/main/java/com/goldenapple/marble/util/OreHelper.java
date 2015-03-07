@@ -17,10 +17,4 @@ public class OreHelper {
     public static boolean isItemThisOre(Item item, String ore){
         return isItemThisOre(new ItemStack(item), ore);
     }
-
-    public static void dumpAllOres(){
-        for (String l : OreDictionary.getOreNames()){
-            LogHelper.info(l);
-        }
-    }
 }

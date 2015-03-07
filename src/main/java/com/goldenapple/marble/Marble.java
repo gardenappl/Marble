@@ -1,5 +1,6 @@
 package com.goldenapple.marble;
 
+import com.goldenapple.marble.compat.ThermalExpansionRecipes;
 import com.goldenapple.marble.crafting.CraftingHandler;
 import com.goldenapple.marble.enhcant.EnchantmentWithering;
 import com.goldenapple.marble.enhcant.WitheringHandler;
@@ -48,7 +49,7 @@ public class Marble {
         }
     };
 
-    public static Random rand = new Random(); //a shared instance of Random for the whole mod
+    public static Random rand = new Random(); //a shared instance of Random for the whole mod. I don't know why I'm so paranoid about it
 
     @Mod.Instance
     public static Marble instance;
@@ -78,14 +79,12 @@ public class Marble {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ModRecipes.init();
+        ThermalExpansionRecipes.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(Marble.instance, new GuiHandler());
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event){
-        if(ConfigHandler.dumpAllOres){
-            OreHelper.dumpAllOres();
-        }
     }
 }

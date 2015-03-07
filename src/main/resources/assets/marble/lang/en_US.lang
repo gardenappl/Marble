@@ -1,7 +1,15 @@
 # Items
-item.marble:diamond_dust.name=Diamond Dust
-item.marble:diamond_dust_small.name=Tiny Pile of Diamond Dust
 item.marble:aetheric_dust.name=Aetheric Dust
+item.marble:diamond_dust.name=Diamond Dust
+item.marble:ruby_dust.name=Ruby Dust
+item.marble:sapphire_dust.name=Sapphire Dust
+item.marble:peridot_dust.name=Peridot Dust
+item.marble:amethyst_dust.name=Amethyst Dust
+item.marble:diamond_dust_small.name=Tiny Pile of Diamond Dust
+item.marble:ruby_dust_small.name=Tiny Pile of Ruby Dust
+item.marble:sapphire_dust_small.name=Tiny Pile of Sapphire Dust
+item.marble:peridot_dust_small.name=Tiny Pile of Peridot Dust
+item.marble:amethyst_dust_small.name=Tiny Pile of Amethyst Dust
 item.marble:apple_pie.name=Apple Pie
 item.marble:golden_apple_pie.name=Golden Apple Pie
 item.marble:food_void.name=Belly Emptinizator Pills 3000

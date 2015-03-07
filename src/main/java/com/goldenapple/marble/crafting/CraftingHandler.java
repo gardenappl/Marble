@@ -1,5 +1,6 @@
 package com.goldenapple.marble.crafting;
 
+import com.goldenapple.marble.init.ModItems;
 import com.goldenapple.marble.util.MiscHelper;
 import com.goldenapple.marble.util.OreHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -10,36 +11,24 @@ import net.minecraft.item.ItemStack;
 public class CraftingHandler {
     @SubscribeEvent
     public void onCraft(PlayerEvent.ItemCraftedEvent event){
-        boolean pickFound = false;
-        boolean diamondFound = false;
-        boolean somethingElseFound = false;
         ItemStack pickaxe = null;
-        int pickaxeSlot = -1;
 
-        for(int i = 0; i < event.craftMatrix.getSizeInventory(); i++){
-            if(event.craftMatrix.getStackInSlot(i) != null) {   //if there's an item
-                ItemStack stack = event.craftMatrix.getStackInSlot(i);
-
-                if (stack.getItem() instanceof ItemPickaxe && !somethingElseFound){ //check if it's a valid pickaxe
+        if(OreHelper.isItemThisOre(event.crafting, "dustTinyGem")){
+            for(int slot = 0; slot < event.craftMatrix.getSizeInventory(); slot++){
+                if(event.craftMatrix.getStackInSlot(slot) != null){
+                    ItemStack stack = event.craftMatrix.getStackInSlot(slot);
                     if(stack.getItem().getHarvestLevel(stack, "pickaxe") >= 2){
                         if(stack.getItemDamage() < stack.getMaxDamage() - 7){
-                            pickFound = true;
-                            pickaxe = stack;
-                            pickaxeSlot = i;
+                            pickaxe = stack.copy();
                         }
                     }
-                }else if(OreHelper.isItemThisOre(stack, "gemDiamond") && !somethingElseFound){ //check if it's a diamond
-                    diamondFound = true;
-                }else{
-                    somethingElseFound = true;
                 }
             }
         }
-
-        if(pickFound && diamondFound && !somethingElseFound && pickaxe != null){
-            pickaxe.setItemDamage(pickaxe.getItemDamage() + 5);
+        if(pickaxe != null){
+            pickaxe.damageItem(5, event.player);
             if(!event.player.worldObj.isRemote) {
-                MiscHelper.drop(event.player, pickaxe, 2);
+                MiscHelper.drop(event.player, pickaxe, 0);
             }
         }
     }

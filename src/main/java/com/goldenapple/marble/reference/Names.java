@@ -30,11 +30,14 @@ public class Names {
                                                         "red_clay_brick",
                                                         "black_clay_brick",};
 
+
     public static final String DUST = "dust";
     public static final String[] DUSTS = {"diamond_dust", "aetheric_dust", "diamond_dust_small"};
     public static final String APPLE_PIE = "apple_pie";
     public static final String GOLDEN_APPLE_PIE = "golden_apple_pie";
     public static final String FOOD_VOID = "food_void";
+    public static final String MOD_DUST = "mod_dust";
+    public static final String[] MOD_DUSTS = {"ruby_dust", "sapphire_dust", "peridot_dust", "amethyst_dust", "ruby_dust_small", "sapphire_dust_small", "peridot_dust_small", "amethyst_dust_small"};
 
     public static final String WITHERING = "withering";
 }

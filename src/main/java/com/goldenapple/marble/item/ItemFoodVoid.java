@@ -15,9 +15,18 @@ public class ItemFoodVoid extends ItemFoodCommon {
     }
 
     @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        if(player.getFoodStats().getFoodLevel() > 0){
+            return super.onItemRightClick(itemStack, world, player);
+        }else{
+            return itemStack;
+        }
+    }
+
+    @Override
     protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
-        if(!world.isRemote){
-            player.getFoodStats().setFoodLevel(player.getFoodStats().getFoodLevel() - 2);
+        if (!world.isRemote) {
+            player.getFoodStats().setFoodLevel(Math.max(player.getFoodStats().getFoodLevel() - 2, 0));
             player.getFoodStats().setFoodSaturationLevel(0);
         }
     }
@@ -27,5 +36,10 @@ public class ItemFoodVoid extends ItemFoodCommon {
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean wat) {
         list.add(StatCollector.translateToLocal("tooltip.marble.creative"));
         list.add(StatCollector.translateToLocal("tooltip.marble.food_void"));
+    }
+
+    @Override
+    public int getMaxItemUseDuration(ItemStack itemStack) {
+        return 16;
     }
 }

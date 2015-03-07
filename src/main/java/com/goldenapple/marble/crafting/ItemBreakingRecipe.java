@@ -8,12 +8,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-public class DiamondBreakingRecipe implements IRecipe {
+public class ItemBreakingRecipe implements IRecipe {
+    private ItemStack output;
+    private String ore;
+
+    public ItemBreakingRecipe(ItemStack ouptut, String recipe){
+        this.output = ouptut;
+        this.ore = recipe;
+    }
 
     @Override
     public boolean matches(InventoryCrafting crafting, World world) {
         boolean pickFound = false;
-        boolean diamondFound = false;
+        boolean gemFound = false;
         boolean somethingElseFound = false;
 
         for(int i = 0; i < crafting.getSizeInventory(); i++){
@@ -26,20 +33,20 @@ public class DiamondBreakingRecipe implements IRecipe {
                             pickFound = true;
                         }
                     }
-                }else if(OreHelper.isItemThisOre(stack, "gemDiamond") && !somethingElseFound){ //check if it's a diamond
-                    diamondFound = true;
+                }else if(OreHelper.isItemThisOre(stack, ore) && !somethingElseFound){ //check if it's a gem
+                    gemFound = true;
                 }else{
                     somethingElseFound = true;
                 }
             }
         }
 
-        return pickFound && diamondFound && !somethingElseFound;
+        return pickFound && gemFound && !somethingElseFound;
     }
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting p_77572_1_) {
-        return new ItemStack(ModItems.dust, 3, 2);
+        return output.copy();
     }
 
     @Override
@@ -49,6 +56,6 @@ public class DiamondBreakingRecipe implements IRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return new ItemStack(ModItems.dust, 3, 2);
+        return output.copy();
     }
 }

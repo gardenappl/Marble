@@ -1,6 +1,7 @@
 package com.goldenapple.marble.init;
 
-import com.goldenapple.marble.crafting.DiamondBreakingRecipe;
+import com.goldenapple.marble.crafting.ItemBreakingRecipe;
+import com.goldenapple.marble.reference.Metadata;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,7 +27,7 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.multiStainedGlass, 8),
                 "GGG",
                 "GdG",
-                "GGG", 'G', "blockGlassColorless", 'd', "dustTinyDiamond"));
+                "GGG", 'G', "blockGlassColorless", 'd', "dustTinyGem"));
 
         //Multicolored Glass Pane
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.multiStainedGlassPane, 16),
@@ -43,23 +44,49 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rope, 8, 1),
                 "III",
                 "IdI",
-                "III", 'I', new ItemStack(ModBlocks.rope), 'd', new ItemStack(ModItems.dust, 1, 1)));
+                "III", 'I', new ItemStack(ModBlocks.rope), 'd', new ItemStack(ModItems.dust, 1, Metadata.AETHERIC_DUST)));
 
-        //Diamond -> Small Dust
-        RecipeSorter.register("marble:breaking", DiamondBreakingRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
-        GameRegistry.addRecipe(new DiamondBreakingRecipe());
+        RecipeSorter.register("marble:breaking", ItemBreakingRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 
-        //Diamond Dust -> Small Dust
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.dust, 4, 2),
+        //Gem -> Small Gem Dust
+        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.dust, 3, Metadata.DIAMOND_DUST_SMALL),
+                "gemDiamond"));
+        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.RUBY_DUST_SMALL),
+                "gemRuby"));
+        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.SAPPHIRE_DUST_SMALL),
+                "gemSapphire"));
+        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.PERIDOT_DUST_SMALL),
+                "gemPeridot"));
+        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.AMETHYST_DUST_SMALL),
+                "gemAmethyst"));
+
+        //Gem Dust -> Small Gem Dust
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.dust, 4, Metadata.DIAMOND_DUST_SMALL),
                 "dustDiamond"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 4, Metadata.RUBY_DUST_SMALL),
+                "dustRuby"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 4, Metadata.SAPPHIRE_DUST_SMALL),
+                "dustSapphire"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 4, Metadata.PERIDOT_DUST_SMALL),
+                "dustPeridot"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 4, Metadata.AMETHYST_DUST_SMALL),
+                "dustAmethyst"));
 
-        //Small Dust -> Diamond Dust
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.dust),
+        //Small Gem Dust -> Gem Dust
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.dust, 1, Metadata.DIAMOND_DUST),
                 "dustTinyDiamond", "dustTinyDiamond", "dustTinyDiamond", "dustTinyDiamond"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 1, Metadata.RUBY_DUST),
+                "dustTinyRuby", "dustTinyRuby", "dustTinyRuby", "dustTinyRuby"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 1, Metadata.SAPPHIRE_DUST),
+                "dustTinySapphire", "dustTinySapphire", "dustTinySapphire", "dustTinySapphire"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 1, Metadata.PERIDOT_DUST),
+                "dustTinyPeridot", "dustTinyPeridot", "dustTinyPeridot", "dustTinyPeridot"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.modDust, 1, Metadata.AMETHYST_DUST),
+                "dustTinyAmethyst", "dustTinyAmethyst", "dustTinyAmethyst", "dustTinyAmethyst"));
 
         //Aetheric dust
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.dust, 4, 1),
-                "dustTinyDiamond", "dustRedstone", "dustGlowstone", new ItemStack(Items.feather)));
+                "dustTinyGem", "dustRedstone", "dustGlowstone", new ItemStack(Items.ghast_tear)));
 
         //Null Block
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.nullBlock, 4),
@@ -85,7 +112,27 @@ public class ModRecipes {
     public static void initOreDict(){
         OreDictionary.registerOre("blockGlassMulticolor", ModBlocks.multiStainedGlass);
         OreDictionary.registerOre("paneGlassMulticolor", ModBlocks.multiStainedGlassPane);
-        OreDictionary.registerOre("dustDiamond", new ItemStack(ModItems.dust, 1, 0));
-        OreDictionary.registerOre("dustTinyDiamond", new ItemStack(ModItems.dust, 1, 2));
+
+        OreDictionary.registerOre("dustDiamond", new ItemStack(ModItems.dust, 1, Metadata.DIAMOND_DUST));
+        OreDictionary.registerOre("dustTinyDiamond", new ItemStack(ModItems.dust, 1, Metadata.DIAMOND_DUST_SMALL));
+        OreDictionary.registerOre("dustRuby", new ItemStack(ModItems.modDust, 1, Metadata.RUBY_DUST));
+        OreDictionary.registerOre("dustTinyRuby", new ItemStack(ModItems.modDust, 1, Metadata.RUBY_DUST_SMALL));
+        OreDictionary.registerOre("dustSapphire", new ItemStack(ModItems.modDust, 1, Metadata.SAPPHIRE_DUST));
+        OreDictionary.registerOre("dustTinySapphire", new ItemStack(ModItems.modDust, 1, Metadata.SAPPHIRE_DUST_SMALL));
+        OreDictionary.registerOre("dustPeridot", new ItemStack(ModItems.modDust, 1, Metadata.PERIDOT_DUST));
+        OreDictionary.registerOre("dustTinyPeridot", new ItemStack(ModItems.modDust, 1, Metadata.PERIDOT_DUST_SMALL));
+        OreDictionary.registerOre("dustAmethyst", new ItemStack(ModItems.modDust, 1, Metadata.AMETHYST_DUST));
+        OreDictionary.registerOre("dustTinyAmethyst", new ItemStack(ModItems.modDust, 1, Metadata.AMETHYST_DUST_SMALL));
+
+        OreDictionary.registerOre("dustGem", new ItemStack(ModItems.dust, 1, Metadata.DIAMOND_DUST));
+        OreDictionary.registerOre("dustGem", new ItemStack(ModItems.modDust, 1, Metadata.RUBY_DUST));
+        OreDictionary.registerOre("dustGem", new ItemStack(ModItems.modDust, 1, Metadata.SAPPHIRE_DUST));
+        OreDictionary.registerOre("dustGem", new ItemStack(ModItems.modDust, 1, Metadata.PERIDOT_DUST));
+        OreDictionary.registerOre("dustGem", new ItemStack(ModItems.modDust, 1, Metadata.AMETHYST_DUST));
+        OreDictionary.registerOre("dustTinyGem", new ItemStack(ModItems.dust, 1, Metadata.DIAMOND_DUST_SMALL));
+        OreDictionary.registerOre("dustTinyGem", new ItemStack(ModItems.modDust, 1, Metadata.RUBY_DUST_SMALL));
+        OreDictionary.registerOre("dustTinyGem", new ItemStack(ModItems.modDust, 1, Metadata.SAPPHIRE_DUST_SMALL));
+        OreDictionary.registerOre("dustTinyGem", new ItemStack(ModItems.modDust, 1, Metadata.PERIDOT_DUST_SMALL));
+        OreDictionary.registerOre("dustTinyGem", new ItemStack(ModItems.modDust, 1, Metadata.AMETHYST_DUST_SMALL));
     }
 }

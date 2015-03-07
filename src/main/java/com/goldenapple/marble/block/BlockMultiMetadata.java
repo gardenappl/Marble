@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -36,5 +37,10 @@ public class BlockMultiMetadata extends BlockCommon {
     public void registerBlockIcons(IIconRegister register) {
         for(int i = 0; i < names.length; i++)
         icons[i] = register.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + names[i]);
+    }
+
+    @Override
+    public int damageDropped(int meta) {
+        return Math.min(meta, icons.length - 1);
     }
 }

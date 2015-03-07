@@ -16,6 +16,7 @@ public class ModItems {
     public static final Item applePie = new ItemFoodCommon(Names.APPLE_PIE, 6, 0.6F);
     public static final Item goldenApplePie = new ItemGoldApplePie();
     public static final Item bellyEmptinizator = new ItemFoodVoid();
+    public static final Item modDust = new ItemMultiMetadata(Names.MOD_DUSTS, Names.MOD_DUST);
 
     public static void init(){
         if(ConfigHandler.loadTallTorch){
@@ -23,6 +24,7 @@ public class ModItems {
         }
         if(ConfigHandler.loadRope || ConfigHandler.loadMulticolorGlass) {
             GameRegistry.registerItem(dust, Names.DUST);
+            GameRegistry.registerItem(modDust, Names.MOD_DUST);
         }
         if(ConfigHandler.loadPies) {
             GameRegistry.registerItem(applePie, Names.APPLE_PIE);

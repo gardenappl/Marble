@@ -12,7 +12,6 @@ public class ConfigHandler {
 
     public static int witheringID;
     public static boolean loadWithering;
-    public static boolean dumpAllOres;
     public static int witherOneDropChance;
     public static int witherTwoDropChance;
     public static boolean loadWIP;
@@ -38,7 +37,6 @@ public class ConfigHandler {
     public static void loadConfig() {
         witheringID = config.getInt("witheringID", Configuration.CATEGORY_GENERAL, 156, 63, 256, "ID of the Withering enchantment");
         loadWithering = config.getBoolean("loadWithering", Configuration.CATEGORY_GENERAL, true, "Set this to false to disable the Withering enchantment");
-        dumpAllOres = config.getBoolean("dumpAllOres", Configuration.CATEGORY_GENERAL, false, "Set this to true to log every OreDictionary ore");
         witherOneDropChance = config.getInt("wither1DropChance", Configuration.CATEGORY_GENERAL, 30, 0, 9001, "1 in X chance to get a Withering I book from a Wither Skeleton (set to 0 to disable)");
         witherTwoDropChance = config.getInt("wither2DropChance", Configuration.CATEGORY_GENERAL, 1, 0, 9001, "1 in X chance to get a Withering II book from the Wither (set to 0 to disable)");
         loadWIP = config.getBoolean("loadWIP", Configuration.CATEGORY_GENERAL, false, "Set this to true to enable new stuff that DOESN'T WORK - sorry dor caps");

@@ -27,7 +27,7 @@ public class WitheringHandler {
         int witheringLevel = EnchantmentHelper.getEnchantmentLevel(ConfigHandler.witheringID, attacker.getHeldItem());
 
         if(witheringLevel != 0 && Marble.rand.nextInt(10) > 4) {
-            event.entityLiving.addPotionEffect(new PotionEffect(Potion.wither.getId(), 60, witheringLevel));
+            event.entityLiving.addPotionEffect(new PotionEffect(Potion.wither.getId(), 80 + 30 * witheringLevel, witheringLevel));
         }
     }
 
