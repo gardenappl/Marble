@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemTallTorch extends Item {
+public class ItemTallTorch extends Item {    //As you can see, this is not an ItemBlock, but i put it here just because
     public ItemTallTorch() {
         setCreativeTab(Marble.MarbleCreativeTab);
     }

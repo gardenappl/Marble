@@ -17,11 +17,11 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.tallTorch, 4),
                 "O",
                 "I",
-                "I", 'O', "coal", 'I', "stickWood"));
+                "I", 'O', new ItemStack(Items.coal, 1, 0), 'I', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.tallTorch, 4),
                 "O",
                 "I",
-                "I", 'O', "charcoal", 'I', "stickWood"));
+                "I", 'O', new ItemStack(Items.coal, 1, 1), 'I', "stickWood"));
 
         //Multicolored Glass
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.multiStainedGlass, 8),
@@ -39,6 +39,10 @@ public class ModRecipes {
                 "W",
                 "W",
                 "W", 'W', "blockCloth"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rope, 16, 0),
+                "W",
+                "W",
+                "W", 'W', Blocks.wool));
 
         //Enchanted Rope
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.rope, 8, 1),

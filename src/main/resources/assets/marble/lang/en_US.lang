@@ -43,10 +43,15 @@ tile.marble:red_clay_brick.name=Red Clay Brick
 tile.marble:black_clay_brick.name=Black Clay Brick
 
 # Tooltips
-tooltip.marble.creative=§6Creative Only
 tooltip.marble.unbreakable=Unbreakable
 tooltip.marble.food_void=Eat them to become hungry
 tooltip.marble.dust=Just add some pickaxes to a diamond...
+tooltip.marble.dust0=Just add some pickaxes to a ruby...
+tooltip.marble.dust1=Just add some pickaxes to a sapphire...
+tooltip.marble.dust2=Just add some pickaxes to a peridot...
+tooltip.marble.dust3=Just add some pickaxes to a amethyst...
+tooltip.marble.rope1=Right-clicking on it while holding
+tooltip.marble.rope2=rope extends it downwards
 
 # Misc
 itemGroup.marble=Marble

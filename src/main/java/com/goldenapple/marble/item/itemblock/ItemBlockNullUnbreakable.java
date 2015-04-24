@@ -16,7 +16,6 @@ public class ItemBlockNullUnbreakable extends ItemBlock{
     @Override
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean wtf) {
-        list.add(StatCollector.translateToLocal("tooltip.marble.creative"));
         list.add(StatCollector.translateToLocal("tooltip.marble.unbreakable"));
     }
 }

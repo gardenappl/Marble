@@ -34,7 +34,6 @@ public class ItemFoodVoid extends ItemFoodCommon {
     @Override
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean wat) {
-        list.add(StatCollector.translateToLocal("tooltip.marble.creative"));
         list.add(StatCollector.translateToLocal("tooltip.marble.food_void"));
     }
 
