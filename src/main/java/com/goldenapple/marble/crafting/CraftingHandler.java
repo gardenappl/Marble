@@ -8,7 +8,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 
-public class CraftingHandler {
+public class CraftingHandler { //used to return the pickaxe after crafting an ItemBreakingRecipe
     @SubscribeEvent
     public void onCraft(PlayerEvent.ItemCraftedEvent event){
         ItemStack pickaxe = null;

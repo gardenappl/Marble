@@ -1,6 +1,7 @@
 package com.goldenapple.marble.init;
 
-import com.goldenapple.marble.crafting.ItemBreakingRecipe;
+import com.goldenapple.marble.crafting.DustCrushingRecipe;
+import com.goldenapple.marble.crafting.UnsignedBookRecipe;
 import com.goldenapple.marble.reference.Metadata;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ModRecipes {
     public static void init(){
+        RecipeSorter.register("marble:crushing", DustCrushingRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+        RecipeSorter.register("marble:unsignedbook", UnsignedBookRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
         //Tall Torch
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.tallTorch, 4),
                 "O",
@@ -50,18 +54,16 @@ public class ModRecipes {
                 "IdI",
                 "III", 'I', new ItemStack(ModBlocks.rope), 'd', new ItemStack(ModItems.dust, 1, Metadata.AETHERIC_DUST)));
 
-        RecipeSorter.register("marble:breaking", ItemBreakingRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
-
         //Gem -> Small Gem Dust
-        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.dust, 3, Metadata.DIAMOND_DUST_SMALL),
+        GameRegistry.addRecipe(new DustCrushingRecipe(new ItemStack(ModItems.dust, 3, Metadata.DIAMOND_DUST_SMALL),
                 "gemDiamond"));
-        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.RUBY_DUST_SMALL),
+        GameRegistry.addRecipe(new DustCrushingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.RUBY_DUST_SMALL),
                 "gemRuby"));
-        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.SAPPHIRE_DUST_SMALL),
+        GameRegistry.addRecipe(new DustCrushingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.SAPPHIRE_DUST_SMALL),
                 "gemSapphire"));
-        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.PERIDOT_DUST_SMALL),
+        GameRegistry.addRecipe(new DustCrushingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.PERIDOT_DUST_SMALL),
                 "gemPeridot"));
-        GameRegistry.addRecipe(new ItemBreakingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.AMETHYST_DUST_SMALL),
+        GameRegistry.addRecipe(new DustCrushingRecipe(new ItemStack(ModItems.modDust, 3, Metadata.AMETHYST_DUST_SMALL),
                 "gemAmethyst"));
 
         //Gem Dust -> Small Gem Dust
@@ -111,6 +113,9 @@ public class ModRecipes {
         //Golden Apple Pie
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.goldenApplePie),
                 new ItemStack(Items.golden_apple), new ItemStack(Items.golden_apple), new ItemStack(Items.golden_apple), new ItemStack(Items.golden_apple), new ItemStack(Items.golden_apple), new ItemStack(Items.golden_apple), new ItemStack(Items.golden_apple), new ItemStack(Items.sugar), new ItemStack(Items.egg)));
+
+        //Signed Book -> Unsigned Book
+        GameRegistry.addRecipe(new UnsignedBookRecipe());
     }
 
     public static void initOreDict(){

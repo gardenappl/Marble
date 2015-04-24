@@ -8,11 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-public class ItemBreakingRecipe implements IRecipe {
+public class DustCrushingRecipe implements IRecipe {
     private ItemStack output;
     private String ore;
 
-    public ItemBreakingRecipe(ItemStack ouptut, String recipe){
+    public DustCrushingRecipe(ItemStack ouptut, String recipe){
         this.output = ouptut;
         this.ore = recipe;
     }
@@ -45,7 +45,7 @@ public class ItemBreakingRecipe implements IRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting p_77572_1_) {
+    public ItemStack getCraftingResult(InventoryCrafting crafting) {
         return output.copy();
     }
 
